@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "graph server",
   "main": "server.js",
+  "engines": {
+    "npm": "5.6",
+    "node": "8.11.4"
+  },
   "scripts": {
     "start": "node server.js",
     "test": "test"
