@@ -1,0 +1,19 @@
+{
+  "name": "graphql-app",
+  "version": "1.0.0",
+  "description": "graph server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "test"
+  },
+  "author": "Jerry GaHe",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.16.1",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
