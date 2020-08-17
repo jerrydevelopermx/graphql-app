@@ -392,13 +392,14 @@ server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
 
 function fetchProducts({ storeId }) {
   return fetch(
-    "http://localhost:3004/products/" + (storeId ? "?storeId=" + storeId : "")
+    "http://3eae8781a9e3.ngrok.io/products/" +
+      (storeId ? "?storeId=" + storeId : "")
   ).then((res) => res.json());
 }
 
 function fetchProduct({ storeId, id }) {
   return fetch(
-    "http://localhost:3004/products/" +
+    "http://3eae8781a9e3.ngrok.io/products/" +
       (storeId ? "?storeId=" + storeId : "") +
       "&id=" +
       id
@@ -408,14 +409,14 @@ function fetchProduct({ storeId, id }) {
 }
 
 function fetchPages({ id }) {
-  return fetch("http://localhost:3004/pages/" + (id ? id : "")).then((res) =>
-    res.json()
-  );
+  return fetch(
+    "http://3eae8781a9e3.ngrok.io/pages/" + (id ? id : "")
+  ).then((res) => res.json());
 }
 
 function fetchContent({ storeId, sectionId }) {
   return fetch(
-    "http://localhost:3004/sectionsContent" +
+    "http://3eae8781a9e3.ngrok.io/sectionsContent" +
       (storeId ? "?pageId=" + storeId : "") +
       (sectionId ? "&sectionId=" + sectionId : "")
   )
