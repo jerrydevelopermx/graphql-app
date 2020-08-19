@@ -249,9 +249,22 @@ const typeDefs = gql`
     background: String
   }
 
+  type BackgroundStyle {
+    backgroundColor: String
+  }
+  type RootStyle {
+    color: String
+    backgroundColor: String
+    hover: BackgroundStyle
+  }
+  type CloseButtonStyles {
+    root: RootStyle
+  }
+
   type ContentModalStyles {
     contentModalsHeader: ModalsHeaderStyles
     contentModalsBody: ModalsBodyStyles
+    closeButton: CloseButtonStyles
   }
 
   type DrawerStyles {
@@ -280,6 +293,16 @@ const typeDefs = gql`
     detailsBody: DetailsBodyStyles
   }
 
+  type ButtonStyle {
+    root: RootStyle
+  }
+  type ButtonsStyles {
+    closeModal: ButtonStyle
+    addToCart: ButtonStyle
+    wishList: ButtonStyle
+    checkout: ButtonStyle
+    viewMore: ButtonStyle
+  }
   type PageStyles {
     body: BodyStyles
     header: HeaderStyles
@@ -291,6 +314,7 @@ const typeDefs = gql`
     contentModal: ContentModalStyles
     mobileNavBar: MobileBarStyles
     detailsModal: DetailsModalStyles
+    buttons: ButtonsStyles
   }
 
   type Page {
