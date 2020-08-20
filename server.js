@@ -276,8 +276,8 @@ const typeDefs = gql`
   }
 
   type MobileBarStyles {
-    drawer: DrawerStyles
-    drawerList: DrawerListStyles
+    paper: DrawerStyles
+    list: DrawerListStyles
   }
 
   type DetailsHeaderStyles {
@@ -423,14 +423,14 @@ server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
 
 function fetchProducts({ storeId }) {
   return fetch(
-    "http://d86a0f04e298.ngrok.io/products/" +
+    "http://2729b730c161.ngrok.io/products/" +
       (storeId ? "?storeId=" + storeId : "")
   ).then((res) => res.json());
 }
 
 function fetchProduct({ storeId, id }) {
   return fetch(
-    "http://d86a0f04e298.ngrok.io/products/" +
+    "http://2729b730c161.ngrok.io/products/" +
       (storeId ? "?storeId=" + storeId : "") +
       "&id=" +
       id
@@ -441,13 +441,13 @@ function fetchProduct({ storeId, id }) {
 
 function fetchPages({ id }) {
   return fetch(
-    "http://d86a0f04e298.ngrok.io/pages/" + (id ? id : "")
+    "http://2729b730c161.ngrok.io/pages/" + (id ? id : "")
   ).then((res) => res.json());
 }
 
 function fetchContent({ storeId, sectionId }) {
   return fetch(
-    "http://d86a0f04e298.ngrok.io/sectionsContent" +
+    "http://2729b730c161.ngrok.io/sectionsContent" +
       (storeId ? "?pageId=" + storeId : "") +
       (sectionId ? "&sectionId=" + sectionId : "")
   )
