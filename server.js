@@ -348,6 +348,7 @@ const typeDefs = gql`
     material: String
     name: String
     coverImage: String
+    hoverImage: String
     description: String
     price: String
     specifications: String
