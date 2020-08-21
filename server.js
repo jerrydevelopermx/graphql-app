@@ -354,6 +354,7 @@ const typeDefs = gql`
     warranties: String
     category: String
     attributes: [ProductAttribute]
+    gallery: [Slide]
   }
 
   type ContentItem {
