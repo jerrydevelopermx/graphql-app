@@ -123,72 +123,17 @@ const typeDefs = gql`
 
   type BottomBarStyles {
     background: String
-    padding: String
     color: String
     fontSize: String
   }
 
-  type FooterColumnStyles {
-    width: String
-    margin: String
-    textAlign: String
-  }
-
   type FooterLinksStyles {
     color: String
-    textDecoration: String
-  }
-
-  type CenteredContentStyles {
-    margin: String
-    textAlign: String
-  }
-
-  type SocialMediaIconsStyles {
-    width: String
-    margin: String
   }
 
   type FooterStyles {
     bottomBar: BottomBarStyles
-    footerColumn: FooterColumnStyles
     footerLinks: FooterLinksStyles
-    centeredContent: CenteredContentStyles
-    socialMediaIcons: SocialMediaIconsStyles
-  }
-
-  type SearchContentStyles {
-    border: String
-    padding: String
-    margin: String
-  }
-
-  type SearchFieldStyles {
-    margin: String
-    minWidth: String
-    borderCollapse: String
-    borderRadius: String
-  }
-
-  type SearchFilterStyles {
-    searchContent: SearchContentStyles
-    searchField: SearchFieldStyles
-  }
-
-  type VideoContainerStyles {
-    marginTop: String
-    marginBottom: String
-  }
-
-  type VideoPlayerStyles {
-    margin: String
-    width: String
-    textAlign: String
-  }
-
-  type VideoStyles {
-    videoContainer: VideoContainerStyles
-    videoPlayer: VideoPlayerStyles
   }
 
   type SliderStyles {
@@ -294,8 +239,6 @@ const typeDefs = gql`
     body: BodyStyles
     header: HeaderStyles
     footer: FooterStyles
-    searchFilter: SearchFilterStyles
-    video: VideoStyles
     slider: SliderStyles
     grid: GridStyles
     contentModal: ContentModalStyles
