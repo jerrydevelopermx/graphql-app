@@ -1,19 +1,6 @@
 const fetch = require("node-fetch");
 const { ApolloServer, gql } = require("apollo-server");
-
-// This is a (sample) collection of books we'll be able to query
-// the GraphQL server for.  A more complete example might fetch
-// from an existing data source like a REST API or database.
-const books = [
-  {
-    title: "Harry Potter and the Chamber of Secrets",
-    author: "J.K. Rowling",
-  },
-  {
-    title: "Jurassic Park",
-    author: "Michael Crichton",
-  },
-];
+const API_URL = "http://ab7b39e6a6a9.ngrok.io";
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
@@ -425,14 +412,14 @@ server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
 
 function fetchProducts({ storeId }) {
   return fetch(
-    "http://2729b730c161.ngrok.io/products/" +
-      (storeId ? "?storeId=" + storeId : "")
+    API_URL + "/products/" + (storeId ? "?storeId=" + storeId : "")
   ).then((res) => res.json());
 }
 
 function fetchProduct({ storeId, id }) {
   return fetch(
-    "http://2729b730c161.ngrok.io/products/" +
+    API_URL +
+      "/products/" +
       (storeId ? "?storeId=" + storeId : "") +
       "&id=" +
       id
@@ -442,24 +429,16 @@ function fetchProduct({ storeId, id }) {
 }
 
 function fetchPages({ id }) {
-  return fetch(
-    "http://2729b730c161.ngrok.io/pages/" + (id ? id : "")
-  ).then((res) => res.json());
+  return fetch(API_URL + "/pages/" + (id ? id : "")).then((res) => res.json());
 }
 
 function fetchContent({ storeId, sectionId }) {
   return fetch(
-    "http://2729b730c161.ngrok.io/sectionsContent" +
+    API_URL +
+      "/sectionsContent" +
       (storeId ? "?pageId=" + storeId : "") +
       (sectionId ? "&sectionId=" + sectionId : "")
   )
     .then((res) => res.json())
     .then((json) => json[0]);
-}
-
-function fetchCharacters() {
-  // More info about the fetch function? https://github.com/bitinn/node-fetch#json
-  return fetch("https://rickandmortyapi.com/api/character/")
-    .then((res) => res.json())
-    .then((json) => json.results);
 }
