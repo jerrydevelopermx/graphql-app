@@ -119,6 +119,8 @@ const typeDefs = gql`
     headerMenu: HeaderMenuStyle
     styledMenu: StyledMenuStyle
     styledMenuItem: StyledMenuItemStyle
+    contentModal: ContentModalStyles
+    mobileNavBar: MobileBarStyles
   }
 
   type BottomBarStyles {
@@ -235,8 +237,6 @@ const typeDefs = gql`
     header: HeaderStyles
     footer: FooterStyles
     grid: GridStyles
-    contentModal: ContentModalStyles
-    mobileNavBar: MobileBarStyles
     detailsModal: DetailsModalStyles
     buttons: ButtonsStyles
   }
