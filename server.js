@@ -157,13 +157,6 @@ const typeDefs = gql`
     flexGrow: String
   }
 
-  type GridStyles {
-    cardGrid: CardGridStyles
-    card: CardStyles
-    cardMedia: CardMediaStyles
-    cardContent: CardContentStyles
-  }
-
   type BodyStyles {
     background: String
     fontFamily: String
@@ -220,25 +213,14 @@ const typeDefs = gql`
   type DetailsModalStyles {
     detailsHeader: DetailsHeaderStyles
     detailsBody: DetailsBodyStyles
+    closeButton: CloseButtonStyles
   }
 
-  type ButtonStyle {
-    root: RootStyle
-  }
-  type ButtonsStyles {
-    closeModal: ButtonStyle
-    addToCart: ButtonStyle
-    wishList: ButtonStyle
-    checkout: ButtonStyle
-    viewMore: ButtonStyle
-  }
   type PageStyles {
     body: BodyStyles
     header: HeaderStyles
     footer: FooterStyles
-    grid: GridStyles
     detailsModal: DetailsModalStyles
-    buttons: ButtonsStyles
   }
 
   type Page {
