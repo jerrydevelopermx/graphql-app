@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 const { ApolloServer, gql } = require("apollo-server");
-const API_URL = "http://ab7b39e6a6a9.ngrok.io";
+const API_URL = "http://6d82902660bf.ngrok.io";
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
@@ -136,11 +136,6 @@ const typeDefs = gql`
     footerLinks: FooterLinksStyles
   }
 
-  type SliderStyles {
-    marginTop: String
-    textAlign: String
-  }
-
   type CardGridStyles {
     paddingTop: String
     paddingBottom: String
@@ -239,7 +234,6 @@ const typeDefs = gql`
     body: BodyStyles
     header: HeaderStyles
     footer: FooterStyles
-    slider: SliderStyles
     grid: GridStyles
     contentModal: ContentModalStyles
     mobileNavBar: MobileBarStyles
