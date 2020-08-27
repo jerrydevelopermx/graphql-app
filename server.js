@@ -216,11 +216,25 @@ const typeDefs = gql`
     closeButton: CloseButtonStyles
   }
 
+  type ModalHeaderStyles {
+    background: String
+    color: String
+  }
+  type ModalBodyStyles {
+    background: String
+  }
+  type ModalStyles {
+    header: ModalHeaderStyles
+    body: ModalBodyStyles
+    closeButton: CloseButtonStyles
+  }
+
   type PageStyles {
     body: BodyStyles
     header: HeaderStyles
     footer: FooterStyles
     detailsModal: DetailsModalStyles
+    modalStyles: ModalStyles
   }
 
   type Page {
