@@ -355,7 +355,8 @@ function fetchProduct({ storeId, id }) {
       "/products/" +
       (storeId ? "?storeId=" + storeId : "") +
       "&id=" +
-      id / api / site
+      id
+    //id / api / site
   )
     .then((res) => res.json())
     .then((json) => json[0]);
