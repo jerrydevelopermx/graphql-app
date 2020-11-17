@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 const { ApolloServer, gql } = require("apollo-server");
-const API_URL = "http://7eb94efeae9b.ngrok.io";
+const API_URL = "http://localhost:3004";
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
@@ -25,10 +25,15 @@ const typeDefs = gql`
     text: String
   }
 
+  type FilterValues {
+    id: String
+    name: String
+  }
+
   type CategoryFilter {
     id: String
     name: String
-    values: [String]
+    values: [FilterValues]
   }
 
   type Category {
@@ -54,9 +59,14 @@ const typeDefs = gql`
     social: [String]
   }
 
+  type FooterSocial {
+    link: String
+  }
+
   type Footer {
-    copyright: String
     columns: [FooterColumn]
+    social: [FooterSocial]
+    copyright: String
   }
 
   type ToolbarSecondaryStyle {
@@ -160,6 +170,7 @@ const typeDefs = gql`
   type BodyStyles {
     background: String
     fontFamily: String
+    color: String
   }
 
   type ModalsHeaderStyles {
@@ -244,6 +255,7 @@ const typeDefs = gql`
     coverImage: String
     description: String
     headerMenu: [Menu]
+    blogLink: String
     slides: [Slide]
     categories: [Category]
     offers: [Slide]
@@ -297,7 +309,7 @@ const typeDefs = gql`
     page(id: ID!): Page
     storeGrid(storeId: ID!): [Product]
     content(storeId: ID!, sectionId: String): Content
-    product(storeId: String, id: ID!): Product
+    product(id: ID!): Product
   }
 `;
 
@@ -319,8 +331,8 @@ const resolvers = {
       return fetchContent({ storeId, sectionId });
     },
     product: (parent, args) => {
-      const { storeId, id } = args;
-      return fetchProduct({ storeId, id });
+      const { id } = args;
+      return fetchProduct({ id });
     },
   },
 };
@@ -349,15 +361,8 @@ function fetchProducts({ storeId }) {
   ).then((res) => res.json());
 }
 
-function fetchProduct({ storeId, id }) {
-  return fetch(
-    API_URL +
-      "/products/" +
-      (storeId ? "?storeId=" + storeId : "") +
-      "&id=" +
-      id
-    //id / api / site
-  )
+function fetchProduct({ id }) {
+  return fetch(API_URL + "/products/?id=" + id)
     .then((res) => res.json())
     .then((json) => json[0]);
 }
