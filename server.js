@@ -1,8 +1,8 @@
 const fetch = require("node-fetch");
 const { ApolloServer, gql } = require("apollo-server");
-const API_URL = "http://localhost:3004";
+const API_URL = "http://779e2cbacf41.ngrok.io"; //"http://localhost:3004";
 const GOREST_API_URL = "https://gorest.co.in/public-api/";
-const HOBBIT_API_URL = "http://d3efb86d1c5c.ngrok.io/";
+const HOBBIT_API_URL = "http://d9f32d4afedc.ngrok.io/";
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
