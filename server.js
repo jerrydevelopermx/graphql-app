@@ -14,9 +14,9 @@ const typeDefs = gql`
     id: ID
     name: String
     logo: String
-    coverImage: String
+    coverimage: String
     description: String
-    blogLink: String
+    bloglink: String
     slides: [Slide]
     categories: [Category]
     offers: [Slide]
@@ -46,8 +46,6 @@ const typeDefs = gql`
   }
 
   type Video { # ****************
-    autoPlay: Boolean
-    poster: String
     src: String
   }
 
@@ -74,12 +72,11 @@ const typeDefs = gql`
     body: BodyStyles
     header: HeaderStyles
     footer: FooterStyles
-    detailsModal: DetailsModalStyles
     modalStyles: ModalStyles
   }
   type BodyStyles {
     background: String
-    fontFamily: String
+    fontfamily: String
     color: String
   }
   type HeaderStyles {
@@ -184,20 +181,6 @@ const typeDefs = gql`
     color: String
   }
 
-  type DetailsModalStyles {
-    detailsHeader: DetailsHeaderStyles
-    detailsBody: DetailsBodyStyles
-    closeButton: CloseButtonStyles
-  }
-
-  type DetailsHeaderStyles {
-    background: String
-    color: String
-  }
-
-  type DetailsBodyStyles {
-    background: String
-  }
   type ModalStyles {
     header: ModalHeaderStyles
     body: ModalBodyStyles
@@ -217,14 +200,14 @@ const typeDefs = gql`
     id: ID
     storeId: String
     type: String
-    categoryId: String
+    categoryid: String
     color: String
     size: String
     style: String
     material: String
     name: String
-    coverImage: String
-    hoverImage: String
+    coverimage: String
+    hoverimage: String
     description: String
     price: String
     specifications: String
@@ -430,7 +413,7 @@ const typeDefs = gql`
     event2DefaultLink: String
     event3DefaultLink: String
     contactUsJson: String
-    blogLink: String
+    bloglink: String
     slide1DefaultLink: String
     slide2DefaultLink: String
     slide3DefaultLink: String
@@ -653,7 +636,7 @@ const typeDefs = gql`
   input SiteContentInput {
     siteTitleText: String
     siteMetaDescriptionText: String
-    blogLink: String
+    bloglink: String
     siteFacebookLink: String
     siteTwitterLink: String
     siteInstagramLink: String
