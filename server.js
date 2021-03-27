@@ -1,180 +1,147 @@
 const fetch = require("node-fetch");
 const { ApolloServer, gql } = require("apollo-server");
-const API_URL = "http://779e2cbacf41.ngrok.io"; //"http://localhost:3004";
+const API_URL = "http://localhost:3004"; //"http://779e2cbacf41.ngrok.io"; //"http://localhost:3004";
 const GOREST_API_URL = "https://gorest.co.in/public-api/";
-const HOBBIT_API_URL = "http://d9f32d4afedc.ngrok.io/";
+const HOBBIT_API_URL = "http://7a1fe1063c4d.ngrok.io/";
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
 const typeDefs = gql`
-  # Comments in GraphQL are defined with the hash (#) symbol.
+  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ QUERIES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  type SubMenu {
-    text: String
-    action: String
+  # Page configuration settings
+  type Page {
+    id: ID
+    name: String
+    logo: String
+    coverImage: String
+    description: String
+    blogLink: String
+    slides: [Slide]
+    categories: [Category]
+    offers: [Slide]
+    video: Video
+    footer: Footer
+    styles: PageStyles
   }
 
-  type Menu {
-    type: String
-    label: String
-    url: String
-    action: String
-    items: [SubMenu]
-  }
-
-  type Slide {
+  type Slide { # ****************
     img: String
     text: String
   }
 
-  type FilterValues {
+  type Category { # ****************
     id: String
     name: String
+    filters: [CategoryFilter]
   }
-
   type CategoryFilter {
     id: String
     name: String
     values: [FilterValues]
   }
-
-  type Category {
+  type FilterValues {
     id: String
     name: String
-    filters: [CategoryFilter]
   }
-  type Video {
+
+  type Video { # ****************
     autoPlay: Boolean
     poster: String
     src: String
   }
 
-  type FooterColumnOption {
-    text: String
-    url: String
+  type Footer { # ****************
+    columns: [FooterColumn]
+    social: [FooterSocial]
+    copyright: String
   }
-
   type FooterColumn {
     id: String
     title: String
     options: [FooterColumnOption]
     social: [String]
   }
-
   type FooterSocial {
     link: String
   }
-
-  type Footer {
-    columns: [FooterColumn]
-    social: [FooterSocial]
-    copyright: String
+  type FooterColumnOption {
+    text: String
+    url: String
   }
 
-  type ToolbarSecondaryStyle {
-    justifyContent: String
-    overflowX: String
-    marginTop: String
+  type PageStyles { # ****************
+    body: BodyStyles
+    header: HeaderStyles
+    footer: FooterStyles
+    detailsModal: DetailsModalStyles
+    modalStyles: ModalStyles
   }
-
-  type ToolbarLinkStyle {
-    width: String
-    padding: String
-    flexShrink: String
-  }
-
-  type HeaderActiveStyle {
-    color: String
-  }
-
-  type HoverHeaderMenu {
-    textDecoration: String
-    cursor: String
-  }
-  type HeaderMenuStyle {
-    color: String
-    fontSize: String
-    textDecoration: String
-    width: String
-    textAlign: String
-  }
-
-  type TopBarStyle {
-    background: String
-    height: String
-  }
-
-  type PaperMenuStyle {
-    backgroundColor: String
-    color: String
-  }
-  type StyledMenuStyle {
-    paper: PaperMenuStyle
-  }
-
-  type HoverMenuItemStyle {
-    backgroundColor: String
-  }
-  type RootMenuItemStyle {
-    hover: HoverMenuItemStyle
-  }
-
-  type StyledMenuItemStyle {
-    root: RootMenuItemStyle
-  }
-
-  type HeaderStyles {
-    topBar: TopBarStyle
-    toolbarSecondary: ToolbarSecondaryStyle
-    toolbarLink: ToolbarLinkStyle
-    headerActive: HeaderActiveStyle
-    headerMenu: HeaderMenuStyle
-    styledMenu: StyledMenuStyle
-    styledMenuItem: StyledMenuItemStyle
-    contentModal: ContentModalStyles
-    mobileNavBar: MobileBarStyles
-  }
-
-  type BottomBarStyles {
-    background: String
-    color: String
-    fontSize: String
-  }
-
-  type FooterLinksStyles {
-    color: String
-  }
-
-  type FooterStyles {
-    bottomBar: BottomBarStyles
-    footerLinks: FooterLinksStyles
-  }
-
-  type CardGridStyles {
-    paddingTop: String
-    paddingBottom: String
-  }
-
-  type CardStyles {
-    height: String
-    display: String
-    flexDirection: String
-  }
-
-  type CardMediaStyles {
-    paddingTop: String
-  }
-
-  type CardContentStyles {
-    flexGrow: String
-  }
-
   type BodyStyles {
     background: String
     fontFamily: String
     color: String
   }
+  type HeaderStyles {
+    topBar: TopBarStyle
+    toolbarSecondary: ToolbarSecondaryStyle # BYE
+    toolbarLink: ToolbarLinkStyle # BYE
+    headerActive: HeaderActiveStyle # BYE
+    headerMenu: HeaderMenuStyle
+    styledMenu: StyledMenuStyle
+    styledMenuItem: StyledMenuItemStyle # BYE
+    contentModal: ContentModalStyles # BYE
+    mobileNavBar: MobileBarStyles
+  }
+  type TopBarStyle {
+    background: String
+    height: String # BYE
+  }
+  type ToolbarSecondaryStyle {
+    justifyContent: String
+    overflowX: String
+    marginTop: String
+  }
+  type ToolbarLinkStyle {
+    width: String
+    padding: String
+    flexShrink: String
+  }
+  type HeaderActiveStyle {
+    color: String
+  }
+  type HeaderMenuStyle {
+    color: String
+    fontSize: String # BYE
+    textDecoration: String # BYE
+    width: String # BYE
+    textAlign: String # BYE
+  }
+  type StyledMenuStyle {
+    paper: PaperMenuStyle
+  }
+  type PaperMenuStyle {
+    backgroundColor: String
+    color: String
+  }
 
+  type StyledMenuItemStyle {
+    root: RootMenuItemStyle
+  }
+  type RootMenuItemStyle {
+    hover: HoverMenuItemStyle
+  }
+  type HoverMenuItemStyle {
+    backgroundColor: String
+  }
+  type CloseButtonStyles {
+    root: RootStyle
+  }
+  type ContentModalStyles {
+    contentModalsHeader: ModalsHeaderStyles
+    contentModalsBody: ModalsBodyStyles
+    closeButton: CloseButtonStyles
+  }
   type ModalsHeaderStyles {
     background: String
     color: String
@@ -184,24 +151,18 @@ const typeDefs = gql`
     background: String
   }
 
-  type BackgroundStyle {
-    backgroundColor: String
-  }
   type RootStyle {
     color: String
     backgroundColor: String
-    hover: BackgroundStyle
+    hover: BackgroundStyle # BYE
   }
-  type CloseButtonStyles {
-    root: RootStyle
+  type BackgroundStyle { # BYE
+    backgroundColor: String
   }
-
-  type ContentModalStyles {
-    contentModalsHeader: ModalsHeaderStyles
-    contentModalsBody: ModalsBodyStyles
-    closeButton: CloseButtonStyles
+  type MobileBarStyles {
+    paper: DrawerStyles
+    list: DrawerListStyles # BYE
   }
-
   type DrawerStyles {
     background: String
     color: String
@@ -210,9 +171,23 @@ const typeDefs = gql`
     width: String
   }
 
-  type MobileBarStyles {
-    paper: DrawerStyles
-    list: DrawerListStyles
+  type FooterStyles {
+    bottomBar: BottomBarStyles
+    footerLinks: FooterLinksStyles
+  }
+  type BottomBarStyles {
+    background: String
+    color: String
+    fontSize: String # BYE
+  }
+  type FooterLinksStyles {
+    color: String
+  }
+
+  type DetailsModalStyles {
+    detailsHeader: DetailsHeaderStyles
+    detailsBody: DetailsBodyStyles
+    closeButton: CloseButtonStyles
   }
 
   type DetailsHeaderStyles {
@@ -223,9 +198,9 @@ const typeDefs = gql`
   type DetailsBodyStyles {
     background: String
   }
-  type DetailsModalStyles {
-    detailsHeader: DetailsHeaderStyles
-    detailsBody: DetailsBodyStyles
+  type ModalStyles {
+    header: ModalHeaderStyles
+    body: ModalBodyStyles
     closeButton: CloseButtonStyles
   }
 
@@ -236,41 +211,8 @@ const typeDefs = gql`
   type ModalBodyStyles {
     background: String
   }
-  type ModalStyles {
-    header: ModalHeaderStyles
-    body: ModalBodyStyles
-    closeButton: CloseButtonStyles
-  }
 
-  type PageStyles {
-    body: BodyStyles
-    header: HeaderStyles
-    footer: FooterStyles
-    detailsModal: DetailsModalStyles
-    modalStyles: ModalStyles
-  }
-
-  type Page {
-    id: ID
-    name: String
-    logo: String
-    coverImage: String
-    description: String
-    headerMenu: [Menu]
-    blogLink: String
-    slides: [Slide]
-    categories: [Category]
-    offers: [Slide]
-    video: Video
-    footer: Footer
-    styles: PageStyles
-  }
-
-  type ProductAttribute {
-    name: String
-    values: [String]
-  }
-
+  # PRODUCT QUERIES +************************
   type Product {
     id: ID
     storeId: String
@@ -291,19 +233,24 @@ const typeDefs = gql`
     attributes: [ProductAttribute]
     gallery: [Slide]
   }
-
-  type ContentItem {
-    type: String
-    text: String
+  type ProductAttribute {
+    name: String
+    values: [String]
   }
 
+  # CONTENT *******************************
   type Content {
     pageId: ID
     sectionId: String
     title: String
     content: [ContentItem]
   }
+  type ContentItem {
+    type: String
+    text: String
+  }
 
+  # USER *******************************
   type User {
     id: ID
     departmentID: Int
@@ -355,6 +302,7 @@ const typeDefs = gql`
     modifDatime: String
   }
 
+  # DEPARTMENT *******************************
   type Department {
     id: ID
     departmentID: String
@@ -382,15 +330,7 @@ const typeDefs = gql`
     modifiedByID: String
   }
 
-  input DepartmentInput {
-    departmentName: String
-    departmentID: Int
-  }
-  type DepartmentResponse {
-    id: ID
-    departmentName: String
-  }
-
+  # CAMPAIGN *******************************
   type Campaign {
     id: ID
     campaignNumber: String
@@ -403,7 +343,7 @@ const typeDefs = gql`
     promotedToDatime: String
     campaignStatus: String
   }
-
+  # PRODUCTO (ADMIN) *******************************
   type Producto {
     id: ID
     productNumber: String
@@ -453,13 +393,28 @@ const typeDefs = gql`
     supplier1ProdID: String
     supplier2ID: String
     supplier2ProdID: String
-    isCampaigning: Boolean
+    campaigning: Boolean
     campaignID: String
     gridPromotedPositionIndex: Int
     gridDefaulPositiontIndex: Int
     prodPriorityNumber: String
   }
 
+  type ProdCategory {
+    prodCategoryCode: Int
+    prodCategoryName: String
+    prodCategoryText: String
+    prodCategoryStatus: Boolean
+  }
+
+  type ProdSubcategory {
+    prodSubcategoryCode: Int
+    prodSubcategoryName: String
+    prodSubcategoryText: String
+    prodSubcategoryStatus: Boolean
+  }
+
+  # SITE CMS *******************************
   type SiteCMS {
     siteID: ID
     siteTitleText: String
@@ -495,17 +450,14 @@ const typeDefs = gql`
     siteTwitterLink: String
     siteInstagramLink: String
     sitePinterestLink: String
-    siteCopyrights: String
-  }
-  input AppearanceInput {
-    siteLogoLink: String
-    siteMainColorRGB: String
-    siteBodyColorRGB: String
-    siteFontNameText: String
-    siteMainFontColorText: String
-    siteBodyFontColorText: String
+    siteCopyright: String
   }
 
+  # SITE CMS  HTML CONTENT *******************************
+  type SiteHtmlContent {
+    content: String
+  }
+  # CU MESSAGES *******************************
   type CUMessage {
     id: ID
     messageNumber: Int
@@ -535,7 +487,7 @@ const typeDefs = gql`
     resolutionText: String
     messageStatus: String
   }
-
+  # EVENTS *******************************
   type Event {
     id: ID
     username: String
@@ -558,7 +510,7 @@ const typeDefs = gql`
     eventStatus: String
     eventRetention: String
   }
-
+  # REPLENISHMENTS *******************************
   type Replenishment {
     id: ID
     replenishmentOrderNr: String
@@ -578,6 +530,58 @@ const typeDefs = gql`
     repLIStatus: String
   }
 
+  # SECTIONS CONTENT *******************************
+
+  type NewContent {
+    id: ID
+    content: String
+    sectionId: String
+    title: String
+  }
+
+  # The "Query" type is the root of all GraphQL queries.
+  type Query {
+    pages: [Page]
+    page(id: ID!): Page
+    storeGrid(storeId: ID!): [Product]
+    content(storeId: ID!, sectionId: String): Content
+    product(id: ID!): Product
+    users: [User]
+    user(id: ID!): User
+    departments: [Department]
+    department(id: ID!): Department
+    campaign(id: ID!): Campaign
+    campaigns(departmentID: ID!): [Campaign]
+    productos(departmentID: ID!): [Producto]
+    producto(id: ID!): Producto
+    replenishments(departmentID: ID!): [Replenishment]
+    replenishment(id: ID!): Replenishment
+    newContent(id: ID): NewContent
+    newPageContent(sectionId: String, storeId: ID!): NewContent
+    siteCMS(id: ID): SiteCMS
+    siteHtmlContent(id: ID, sectionId: String): SiteHtmlContent
+    cuMessage(id: ID): CUMessage
+    cuMessages: [CUMessage]
+    event(id: ID): Event
+    events: [Event]
+    prodCategories: [ProdCategory]
+    prodSubcategories(categoryCode: ID): [ProdSubcategory]
+  }
+
+  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ MUTATIONS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  type Message {
+    id: ID!
+    content: String
+    author: String
+  }
+  input MessageInput {
+    content: String
+    author: String
+  }
+  type UserSaved {
+    userLastName: String
+    userFirstName: String
+  }
   input UserInput {
     id: ID
     username: String
@@ -615,54 +619,59 @@ const typeDefs = gql`
     subscriptionEmail: String
     userStatus: String
   }
-
-  input ContentInput {
-    id: ID
-    content: String
-  }
-  type ContentResponse {
-    id: ID
-    content: String
-  }
-  type GenericResponse {
-    id: ID
-  }
-  type NewContent {
-    id: ID
-    content: String
-    sectionId: String
-    title: String
-  }
-  type UserSaved {
-    userLastName: String
-    userFirstName: String
-  }
-
-  input MessageInput {
-    content: String
-    author: String
-  }
-  type Message {
-    id: ID!
-    content: String
-    author: String
-  }
-
   type UserCredentials {
     token: String
     userType: Int
     userName: String
     store: Int
   }
-  type AuthPayload {
-    token: String
-    user: String
+  input DepartmentInput {
+    departmentName: String
+    departmentID: Int
+  }
+  type DepartmentResponse {
+    id: ID
+    departmentName: String
   }
 
-  type UserLogged {
-    id: ID!
-    name: String!
-    email: String!
+  input ContentInput {
+    content: String
+  }
+  type ContentResponse {
+    id: ID
+    content: String
+  }
+  input AppearanceInput {
+    siteLogoLink: String
+    siteMainColorRGB: String
+    siteBodyColorRGB: String
+    siteFontNameText: String
+    siteMainFontColorText: String
+    siteBodyFontColorText: String
+  }
+
+  input SiteContentInput {
+    siteTitleText: String
+    siteMetaDescriptionText: String
+    blogLink: String
+    siteFacebookLink: String
+    siteTwitterLink: String
+    siteInstagramLink: String
+    sitePinterestLink: String
+    siteCopyright: String
+    tourDefaultLink: String
+    event1DefaultLink: String
+    event2DefaultLink: String
+    event3DefaultLink: String
+    slide1DefaultLink: String
+    slide2DefaultLink: String
+    slide3DefaultLink: String
+    slide4DefaultLink: String
+    slide5DefaultLink: String
+  }
+
+  type GenericResponse {
+    id: ID
   }
 
   type Mutation {
@@ -672,33 +681,15 @@ const typeDefs = gql`
     login(email: String!, password: String!, store: Int!): UserCredentials
     addTodo(type: String!): Message
     addDepartment(department: DepartmentInput): DepartmentResponse
-    updateContent(id: ID, content: ContentInput): ContentResponse
+    updateContent(
+      id: ID
+      sectionId: String
+      content: ContentInput
+    ): ContentResponse
     updateAppearance(id: ID, appearance: AppearanceInput): GenericResponse
+    updateSiteContent(id: ID, content: SiteContentInput): GenericResponse
   }
-
-  # The "Query" type is the root of all GraphQL queries.
-  type Query {
-    pages: [Page]
-    page(id: ID!): Page
-    storeGrid(storeId: ID!): [Product]
-    content(storeId: ID!, sectionId: String): Content
-    product(id: ID!): Product
-    users: [User]
-    user(id: ID!): User
-    departments: [Department]
-    department(id: ID!): Department
-    campaign(id: ID!): Campaign
-    campaigns(departmentID: ID!): [Campaign]
-    productos(departmentID: ID!): [Producto]
-    producto(id: ID!): Producto
-    replenishments(departmentID: ID!): [Replenishment]
-    newContent(id: ID): NewContent
-    siteCMS(id: ID): SiteCMS
-    cuMessage(id: ID): CUMessage
-    cuMessages: [CUMessage]
-    event(id: ID): Event
-    events: [Event]
-  }
+  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 `;
 
 // Resolvers define the technique for fetching the types in the
@@ -847,12 +838,17 @@ const resolvers = {
     },
 
     updateContent: (parent, args) => {
-      const { id, content } = args;
-      return updateContent({ id, content });
+      const { id, sectionId, content } = args;
+      return updateContent({ id, sectionId, content });
     },
     updateAppearance: (parent, args) => {
       const { id, appearance } = args;
       return updateAppearance({ id, appearance });
+    },
+    updateSiteContent: (parent, args) => {
+      const { id, content } = args;
+      console.log(args);
+      return updateSiteContent({ id, content });
     },
   },
   Query: {
@@ -899,16 +895,32 @@ const resolvers = {
     },
     producto: (parent, args) => {
       const { id } = args;
+      console.log(args);
       return fetchProducto({ id });
     },
+    prodCategories: (parent, args) => {
+      return fetchCategories();
+    },
+    prodSubcategories: (parent, args) => {
+      const { categoryCode } = args;
+      return fetchSubcategories({ categoryCode });
+    },
+
     replenishments: (parent, args) => {
       const { departmentID } = args;
       return fetchReplenishments({ departmentID });
     },
-
+    replenishment: (parent, args) => {
+      const { id } = args;
+      return fetchReplenishment({ id });
+    },
     newContent: (parent, args) => {
       const { id } = args;
       return fetchNewContent({ id });
+    },
+    newPageContent: (parent, args) => {
+      const { sectionId, storeId } = args;
+      return fetchNewPageContent({ sectionId, storeId });
     },
     siteCMS: (parent, args) => {
       const { id } = args;
@@ -927,6 +939,10 @@ const resolvers = {
     },
     events: (parent, args) => {
       return fetchEvents();
+    },
+    siteHtmlContent: (parent, args) => {
+      const { id, sectionId } = args;
+      return fetchHtmlContent({ id, sectionId });
     },
   },
 };
@@ -962,6 +978,7 @@ function fetchProduct({ id }) {
 }
 
 function fetchPages({ id }) {
+  console.log(API_URL + "/pages/" + (id ? id : ""));
   return fetch(API_URL + "/pages/" + (id ? id : "")).then((res) => res.json());
 }
 
@@ -977,11 +994,22 @@ function fetchContent({ storeId, sectionId }) {
 }
 
 function fetchNewContent({ id }) {
-  return fetch(HOBBIT_API_URL + "/content/" + id)
+  return fetch(HOBBIT_API_URL + "content/" + id)
     .then((res) => res.json())
     .then((json) => json);
 }
 
+function fetchReplenishment({ id }) {
+  console.log(HOBBIT_API_URL + "replenishments/" + id);
+  return fetch(HOBBIT_API_URL + "replenishments/" + id)
+    .then((res) => res.json())
+    .then((json) => json);
+}
+function fetchNewPageContent({ sectionId, storeId }) {
+  return fetch(HOBBIT_API_URL + "content/" + sectionId + "/" + storeId)
+    .then((res) => res.json())
+    .then((json) => json);
+}
 function fetchUsers() {
   return fetch(HOBBIT_API_URL + "users/")
     .then((res) => res.json())
@@ -1020,6 +1048,11 @@ function fetchEvents() {
     .then((res) => res.json())
     .then((json) => json);
 }
+function fetchHtmlContent({ id, sectionId }) {
+  return fetch(HOBBIT_API_URL + "cms/" + id + "/" + sectionId)
+    .then((res) => res.json())
+    .then((json) => json);
+}
 function fetchEvent({ id }) {
   return fetch(HOBBIT_API_URL + "events/" + id)
     .then((res) => res.json())
@@ -1027,7 +1060,6 @@ function fetchEvent({ id }) {
 }
 
 function saveDepartment({ department }) {
-  console.log(JSON.stringify(department));
   return fetch(HOBBIT_API_URL + "departments/", {
     method: "POST",
     headers: {
@@ -1046,10 +1078,10 @@ function saveDepartment({ department }) {
     });
 }
 
-function updateContent({ id, content }) {
-  console.log(id, content);
+function updateContent({ id, sectionId, content }) {
+  console.log(id, sectionId, content);
   console.log(JSON.stringify(content));
-  return fetch(HOBBIT_API_URL + "content/" + id, {
+  return fetch(HOBBIT_API_URL + "cms/" + id + "/" + sectionId, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -1081,6 +1113,25 @@ function updateAppearance({ id, appearance }) {
       return { id: json.siteID };
     });
 }
+
+function updateSiteContent({ id, content }) {
+  console.log(content);
+  return fetch(HOBBIT_API_URL + "cms/" + id + "/content", {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(content),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      return { id: json.siteID };
+    });
+}
+
 function fetchCampaigns({ departmentID }) {
   return fetch(HOBBIT_API_URL + "campaigns/department/" + departmentID)
     .then((res) => res.json())
@@ -1113,6 +1164,28 @@ function fetchProducto({ id }) {
     .then((res) => res.json())
     .then((json) => json);
 }
+
+function fetchCategories() {
+  return fetch(HOBBIT_API_URL + "products/categories")
+    .then((res) => res.json())
+    .then((json) => json);
+}
+
+function fetchSubcategories({ categoryCode }) {
+  return fetch(
+    HOBBIT_API_URL + "products/category/" + categoryCode + "/subcategories"
+  )
+    .then((res) => res.json())
+    .then((json) => json);
+}
+/*prodCategories: (parent, args) => {
+  return fetchCategories();
+},
+prodSubcategories: (parent, args) => {
+  const { categoryCode } = args;
+  return fetchSubcategories({ categoryCode });
+},
+*/
 
 function fetchReplenishments({ departmentID }) {
   return fetch(HOBBIT_API_URL + "replenishments/department/" + departmentID)
