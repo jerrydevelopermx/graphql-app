@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 const { ApolloServer, gql } = require("apollo-server");
 const API_URL = "http://localhost:3004"; //"http://779e2cbacf41.ngrok.io"; //"http://localhost:3004";
 const GOREST_API_URL = "https://gorest.co.in/public-api/";
-const HOBBIT_API_URL = "http://7a1fe1063c4d.ngrok.io/";
+const HOBBIT_API_URL = "http://7dc91ebd5a8e.ngrok.io/";
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
@@ -72,7 +72,7 @@ const typeDefs = gql`
     body: BodyStyles
     header: HeaderStyles
     footer: FooterStyles
-    modalStyles: ModalStyles
+    modalstyles: ModalStyles
   }
   type BodyStyles {
     background: String
@@ -80,102 +80,46 @@ const typeDefs = gql`
     color: String
   }
   type HeaderStyles {
-    topBar: TopBarStyle
-    toolbarSecondary: ToolbarSecondaryStyle # BYE
-    toolbarLink: ToolbarLinkStyle # BYE
-    headerActive: HeaderActiveStyle # BYE
-    headerMenu: HeaderMenuStyle
-    styledMenu: StyledMenuStyle
-    styledMenuItem: StyledMenuItemStyle # BYE
-    contentModal: ContentModalStyles # BYE
-    mobileNavBar: MobileBarStyles
+    topbar: TopBarStyle
+    headermenu: HeaderMenuStyle
+    styledmenu: StyledMenuStyle
+    mobilenavbar: MobileBarStyles
   }
   type TopBarStyle {
     background: String
-    height: String # BYE
-  }
-  type ToolbarSecondaryStyle {
-    justifyContent: String
-    overflowX: String
-    marginTop: String
-  }
-  type ToolbarLinkStyle {
-    width: String
-    padding: String
-    flexShrink: String
-  }
-  type HeaderActiveStyle {
-    color: String
   }
   type HeaderMenuStyle {
     color: String
-    fontSize: String # BYE
-    textDecoration: String # BYE
-    width: String # BYE
-    textAlign: String # BYE
   }
   type StyledMenuStyle {
     paper: PaperMenuStyle
   }
   type PaperMenuStyle {
-    backgroundColor: String
+    background: String
     color: String
-  }
-
-  type StyledMenuItemStyle {
-    root: RootMenuItemStyle
-  }
-  type RootMenuItemStyle {
-    hover: HoverMenuItemStyle
-  }
-  type HoverMenuItemStyle {
-    backgroundColor: String
   }
   type CloseButtonStyles {
     root: RootStyle
   }
-  type ContentModalStyles {
-    contentModalsHeader: ModalsHeaderStyles
-    contentModalsBody: ModalsBodyStyles
-    closeButton: CloseButtonStyles
-  }
-  type ModalsHeaderStyles {
-    background: String
-    color: String
-  }
-
-  type ModalsBodyStyles {
-    background: String
-  }
-
   type RootStyle {
     color: String
-    backgroundColor: String
-    hover: BackgroundStyle # BYE
-  }
-  type BackgroundStyle { # BYE
-    backgroundColor: String
+    background: String
   }
   type MobileBarStyles {
     paper: DrawerStyles
-    list: DrawerListStyles # BYE
   }
   type DrawerStyles {
     background: String
     color: String
   }
-  type DrawerListStyles {
-    width: String
-  }
 
   type FooterStyles {
-    bottomBar: BottomBarStyles
-    footerLinks: FooterLinksStyles
+    bottombar: BottomBarStyles
+    footerlinks: FooterLinksStyles
   }
   type BottomBarStyles {
     background: String
     color: String
-    fontSize: String # BYE
   }
   type FooterLinksStyles {
     color: String
@@ -184,7 +128,7 @@ const typeDefs = gql`
   type ModalStyles {
     header: ModalHeaderStyles
     body: ModalBodyStyles
-    closeButton: CloseButtonStyles
+    closebutton: CloseButtonStyles
   }
 
   type ModalHeaderStyles {
@@ -236,204 +180,204 @@ const typeDefs = gql`
   # USER *******************************
   type User {
     id: ID
-    departmentID: Int
+    departmentid: Int
     username: String
     password: String
-    userAlias: String
-    avatarPhotoLink: String
-    userType: String
-    isLegalPerson: Boolean
-    userLastName: String
-    userFirstName: String
-    address1Text: String
-    address2Text: String
-    cityName: String
-    stateCode: String
-    postalCode: String
-    countryCode: String
-    landlineNumber: Int
-    faxNumber: Int
-    cellPhoneNumber: String
-    alternateEmail: String
-    userEmail: String
+    useralias: String
+    avatarphotolink: String
+    usertype: String
+    islegalperson: Boolean
+    userlastname: String
+    userfirstname: String
+    address1text: String
+    address2text: String
+    cityname: String
+    statecode: String
+    postalcode: String
+    countrycode: String
+    landlinenumber: Int
+    faxnumber: Int
+    cellphonenumber: String
+    alternateemail: String
+    useremail: String
     website: String
-    userIDType: String
-    userIDNumber: String
-    userDOBDate: String
-    userTaxCode: String
-    userTaxCUITL: String
+    useridtype: String
+    useridnumber: String
+    userdobdate: String
+    usertaxcode: String
+    usertaxcuitl: String
     store: Boolean
-    storeContact: Boolean
+    storecontact: Boolean
     supplier: Boolean
-    supplierContact: Boolean
+    suppliercontact: Boolean
     shipper: Boolean
-    shipperContact: Boolean
-    pymntChannel: Boolean
-    pymntChContact: Boolean
+    shippercontact: Boolean
+    pymntchannel: Boolean
+    pymntchcontact: Boolean
     customer: Boolean
     subscriber: Boolean
     member: Boolean
     blogger: Boolean
-    userFacebookLink: String
-    userTwitterLink: String
-    userInstagramLink: String
-    userPinterestLink: String
-    subscriptionEmail: String
-    userStatus: String
-    createdDatime: String
-    modifByID: String
-    modifDatime: String
+    userfacebooklink: String
+    usertwitterlink: String
+    userinstagramlink: String
+    userpinterestlink: String
+    subscriptionemail: String
+    userstatus: String
+    createddatime: String
+    modifbyid: String
+    modifdatime: String
   }
 
   # DEPARTMENT *******************************
   type Department {
     id: ID
-    departmentID: String
-    departmentNumber: String
-    departmentName: String
-    userID: String
-    contactID: String
-    deptCategoryNumber: Int
-    deptStatus: String
-    placeHolderSinceDate: String
-    placeHolderThruDate: String
-    placeHolderType: String
-    placeHolderCode: String
-    contractLink: String
-    deptDefaultImageLink: String
-    deptLogoLink: String
-    campaignID: String
-    gridDefaultPositionIndex: String
-    gridPromotedPositionIndex: String
-    deptPriorityNumber: String
-    modifiedDatime: String
-    createdDatime: String
-    createdByID: String
+    departmentid: String
+    departmentnumber: String
+    departmentname: String
+    userid: String
+    contactid: String
+    deptcategorynumber: Int
+    deptstatus: String
+    placeholdersincedate: String
+    placeholderthrudate: String
+    placeholdertype: String
+    placeholdercode: String
+    contractlink: String
+    deptdefaultimagelink: String
+    deptlogolink: String
+    campaignid: String
+    griddefaultpositionindex: String
+    gridpromotedpositionindex: String
+    deptprioritynumber: String
+    modifieddatime: String
+    createddatime: String
+    createdbyid: String
     campaigning: String
-    modifiedByID: String
+    modifiedbyid: String
   }
 
   # CAMPAIGN *******************************
   type Campaign {
     id: ID
-    campaignNumber: String
-    departmentID: Int
-    productID: String
-    campaignType: String
-    campaignOccurrence: String
-    gridPositionIndex: Int
-    promotedFromDatime: String
-    promotedToDatime: String
-    campaignStatus: String
+    campaignnumber: String
+    departmentid: Int
+    productid: String
+    campaigntype: String
+    campaignoccurrence: String
+    gridpositionindex: Int
+    promotedfromdatime: String
+    promotedtodatime: String
+    campaignstatus: String
   }
   # PRODUCTO (ADMIN) *******************************
   type Producto {
     id: ID
-    productNumber: String
-    departmentID: String
-    productSKU: String
-    productEAN: String
-    productShortName: String
-    productDescription: String
-    prodCategoryCode: Int
-    prodSubcategoryCode: Int
-    brandCode: String
-    modelCode: String
-    yearCode: String
-    styleCode: String
-    genderCode: String
-    packagingCode: String
-    materialCode: String
-    colorCode: String
-    sizeCode: String
-    flavorCode: String
-    attribMask: String
-    attributeMapCode: String
-    prodUOMCode: String
-    prodUnitsInStockNumber: String
-    inventoryCostMethod: String
-    prodUnitCostAmount: String
-    prodMSRPAmount: String
-    prodUnitPriceAmount: String
-    prodCurrencyType: String
-    prodDiscountType: Int
-    prodDiscountCondition: String
-    prodDiscountNumber: String
-    prodPriceCorrectionFactor: String
-    prodUnitsOnOrder: String
-    prodReplenishType: String
-    prodUISThresholdNumber: String
-    pendReplenOrderNumber: Int
-    prodRankingType: Int
-    prodStatus: String
-    prodLocation1Text: Int
-    prodLocation2Text: Int
-    prodSpecifications: String
-    prodNotes: String
-    prodDefaultContentLink: String
-    prodDefaultHoverLink: String
-    supplier1ID: String
-    supplier1ProdID: String
-    supplier2ID: String
-    supplier2ProdID: String
+    productnumber: String
+    departmentid: String
+    productsku: String
+    productean: String
+    productshortname: String
+    productdescription: String
+    prodcategorycode: Int
+    prodsubcategorycode: Int
+    brandcode: String
+    modelcode: String
+    yearcode: String
+    stylecode: String
+    gendercode: String
+    packagingcode: String
+    materialcode: String
+    colorcode: String
+    sizecode: String
+    flavorcode: String
+    attribmask: String
+    attributemapcode: String
+    produomcode: String
+    produnitsinstocknumber: String
+    inventorycostmethod: String
+    produnitcostamount: String
+    prodmsrpamount: String
+    produnitpriceamount: String
+    prodcurrencytype: String
+    proddiscounttype: Int
+    proddiscountcondition: String
+    proddiscountnumber: String
+    prodpricecorrectionfactor: String
+    produnitsonorder: String
+    prodreplenishtype: String
+    produisthresholdnumber: String
+    pendreplenordernumber: Int
+    prodrankingtype: Int
+    prodstatus: String
+    prodlocation1text: Int
+    prodlocation2text: Int
+    prodspecifications: String
+    prodnotes: String
+    proddefaultcontentlink: String
+    proddefaulthoverlink: String
+    supplier1id: String
+    supplier1prodid: String
+    supplier2id: String
+    supplier2prodid: String
     campaigning: Boolean
-    campaignID: String
-    gridPromotedPositionIndex: Int
-    gridDefaulPositiontIndex: Int
-    prodPriorityNumber: String
+    campaignid: String
+    gridpromotedpositionindex: Int
+    griddefaulpositiontindex: Int
+    prodprioritynumber: String
   }
 
   type ProdCategory {
-    prodCategoryCode: Int
-    prodCategoryName: String
-    prodCategoryText: String
-    prodCategoryStatus: Boolean
+    prodcategorycode: Int
+    prodcategoryname: String
+    prodcategorytext: String
+    prodcategorystatus: Boolean
   }
 
   type ProdSubcategory {
-    prodSubcategoryCode: Int
-    prodSubcategoryName: String
-    prodSubcategoryText: String
-    prodSubcategoryStatus: Boolean
+    prodsubcategorycode: Int
+    prodsubcategoryname: String
+    prodsubcategorytext: String
+    prodsubcategorystatus: Boolean
   }
 
   # SITE CMS *******************************
   type SiteCMS {
-    siteID: ID
-    siteTitleText: String
-    siteMetaDescriptionText: String
-    siteLogoLink: String
-    ourServMissionJson: String
-    ourServWhoWeRJson: String
-    ourServBoardJson: String
-    ourServFeaturesJson: String
-    ourServMmbshipJson: String
-    tourDefaultLink: String
-    event1DefaultLink: String
-    event2DefaultLink: String
-    event3DefaultLink: String
-    contactUsJson: String
+    siteid: ID
+    sitetitletext: String
+    sitemetadescriptiontext: String
+    sitelogolink: String
+    ourservmissionhtml: String
+    ourservwhowerhtml: String
+    ourservboardhtml: String
+    ourservfeatureshtml: String
+    ourservmmbshiphtml: String
+    tourdefaultlink: String
+    event1defaultlink: String
+    event2defaultlink: String
+    event3defaultlink: String
+    contactushtml: String
     bloglink: String
-    slide1DefaultLink: String
-    slide2DefaultLink: String
-    slide3DefaultLink: String
-    slide4DefaultLink: String
-    slide5DefaultLink: String
-    footerHistoryJson: String
-    sitePoliciesJson: String
-    siteMembersPolicyJson: String
-    siteCustomrsPolicyJson: String
-    siteVisitorsPolicyJson: String
-    siteMainColorRGB: String
-    siteBodyColorRGB: String
-    siteFontNameText: String
-    siteMainFontColorText: String
-    siteBodyFontColorText: String
-    siteFacebookLink: String
-    siteTwitterLink: String
-    siteInstagramLink: String
-    sitePinterestLink: String
-    siteCopyright: String
+    slide1defaultlink: String
+    slide2defaultlink: String
+    slide3defaultlink: String
+    slide4defaultlink: String
+    slide5defaultlink: String
+    footerhistoryhtml: String
+    sitepolicieshtml: String
+    sitememberspolicyhtml: String
+    sitecustomrspolicyhtml: String
+    sitevisitorspolicyhtml: String
+    sitemaincolorrgb: String
+    sitebodycolorrgb: String
+    sitefontnametext: String
+    sitemainfontcolortext: String
+    sitebodyfontcolortext: String
+    sitefacebooklink: String
+    sitetwitterlink: String
+    siteinstagramlink: String
+    sitepinterestlink: String
+    sitecopyright: String
   }
 
   # SITE CMS  HTML CONTENT *******************************
@@ -443,74 +387,74 @@ const typeDefs = gql`
   # CU MESSAGES *******************************
   type CUMessage {
     id: ID
-    messageNumber: Int
-    emailAddress: String
-    departmentID: Int
-    userID: Int
-    customerID: Int
-    subscriberID: Int
+    messagenumber: Int
+    emailaddress: String
+    departmentid: Int
+    userid: Int
+    customerid: Int
+    subscriberid: Int
     messageType: String
-    lastAndFirstName: String
-    companyName: String
-    messageSubject: String
-    messageBody: String
-    createdDatime: String
-    communicatedTo: Int
-    communicatedDatime: String
-    level1EscalatedTo: Int
-    level1EscalationDatime: String
-    level2EscalatedTo: Int
-    level2EscalationDatime: String
-    modifiedByID: Int
-    modifiedDatime: String
-    resolvedByID: Int
-    resolvedDatime: String
-    approvedByID: Int
-    approvedDatime: String
-    resolutionText: String
-    messageStatus: String
+    lastandfirstname: String
+    companyname: String
+    messagesubject: String
+    messagebody: String
+    createddatime: String
+    communicatedto: Int
+    communicateddatime: String
+    level1escalatedto: Int
+    level1escalationdatime: String
+    level2escalatedto: Int
+    level2escalationdatime: String
+    modifiedbyid: Int
+    modifieddatime: String
+    resolvedbyid: Int
+    resolveddatime: String
+    approvedbyid: Int
+    approveddatime: String
+    resolutiontext: String
+    messagestatus: String
   }
   # EVENTS *******************************
   type Event {
     id: ID
     username: String
-    departmentID: Int
-    userType: String
-    fullName: String
-    cellPhoneNumber: Int
-    userStatus: String
-    eventDatime: String
-    eventCategory: String
-    eventType: String
+    departmentid: Int
+    usertype: String
+    fullname: String
+    cellphonenumber: Int
+    userstatus: String
+    eventdatime: String
+    eventcategory: String
+    eventtype: String
     activity: String
-    originatorID: Int
-    eventStart: String
-    eventEnd: String
-    eventOutcome: String
-    deviceName: String
-    deviceIPaddress: String
-    eventSeverity: String
-    eventStatus: String
-    eventRetention: String
+    originatorid: Int
+    eventstart: String
+    eventend: String
+    eventoutcome: String
+    devicename: String
+    deviceipaddress: String
+    eventseverity: String
+    eventstatus: String
+    eventretention: String
   }
   # REPLENISHMENTS *******************************
   type Replenishment {
     id: ID
-    replenishmentOrderNr: String
-    departmentID: String
-    supplierID: String
-    repGenDatime: String
-    repPlacedDatime: String
-    repOrderStatus: String
-    repLineItemNr: String
-    productID: String
-    supplierProductID: String
-    quantityOrdered: String
-    quantityReceived: String
-    estimatedUnitCost: String
-    actualUnitCost: String
-    dateFulfilled: String
-    repLIStatus: String
+    replenishmentordernr: String
+    departmentid: String
+    supplierid: String
+    repgendatime: String
+    repplaceddatime: String
+    reporderstatus: String
+    replineitemnr: String
+    productid: String
+    supplierproductid: String
+    quantityordered: String
+    quantityreceived: String
+    estimatedunitcost: String
+    actualunitcost: String
+    datefulfilled: String
+    replistatus: String
   }
 
   # SECTIONS CONTENT *******************************
