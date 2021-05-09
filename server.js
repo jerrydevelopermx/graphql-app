@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 const { ApolloServer, gql } = require("apollo-server");
 const API_URL = "http://localhost:3004"; //"http://779e2cbacf41.ngrok.io"; //"http://localhost:3004";
 const GOREST_API_URL = "https://gorest.co.in/public-api/";
-const HOBBIT_API_URL = "http://7dc91ebd5a8e.ngrok.io/";
+const HOBBIT_API_URL = "http://6621868d9633.ngrok.io/";
 
 // Type definitions define the "shape" of your data and specify
 // which ways the data can be fetched from the GraphQL server.
@@ -14,6 +14,7 @@ const typeDefs = gql`
     id: ID
     name: String
     logo: String
+    lang: String
     coverimage: String
     description: String
     bloglink: String
@@ -137,6 +138,7 @@ const typeDefs = gql`
   }
   type ModalBodyStyles {
     background: String
+    color: String
   }
 
   # PRODUCT QUERIES +************************
